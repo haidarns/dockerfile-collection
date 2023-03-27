@@ -1,5 +1,5 @@
 # Build command :
-#   docker build --rm -f python310-uwsgi.Dockerfile -t haidarns/python3.10-uwsgi --no-cache .
+#   docker build --rm -f 3.10-uwsgi.Dockerfile -t haidarns/python:3.10-uwsgi --no-cache .
 
 FROM python:3.10-alpine as builder
 
