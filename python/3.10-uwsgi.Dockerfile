@@ -10,7 +10,7 @@ RUN apk add python3-dev build-base linux-headers pcre-dev \
 # Final Image
 FROM python:3.10-alpine
 
-RUN apk add --clean pcre git nano ssh \
+RUN apk add --clean pcre git nano ssh mailcap \
     && mkdir -p /etc/uwsgi/vassals
 
 COPY --from=builder /root/.local /root/.local
