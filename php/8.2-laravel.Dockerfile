@@ -40,9 +40,9 @@ RUN npm install --global yarn
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 # Start from php8.0 json ext always available
 RUN docker-php-ext-install pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
-RUN pecl install -o -f redis mongodb apcu grpc \
+RUN pecl install -o -f redis mongodb apcu \
     &&  rm -rf /tmp/pear \
-    && docker-php-ext-enable redis mongodb apcu grpc
+    && docker-php-ext-enable redis mongodb apcu
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
