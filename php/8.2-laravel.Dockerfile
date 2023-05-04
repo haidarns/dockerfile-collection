@@ -40,7 +40,7 @@ RUN npm install --global yarn
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 # Start from php8.0 json ext always available
-RUN docker-php-ext-install pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
 RUN pecl install -o -f redis mongodb apcu \
     &&  rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu
