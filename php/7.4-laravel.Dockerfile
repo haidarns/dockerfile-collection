@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y -qq \
     cron \
     git \
     jpegoptim optipng pngquant gifsicle libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev \
+    libmosquitto-dev \
     libssl-dev \
     libzip-dev \
     locales \
@@ -39,9 +40,9 @@ RUN npm install --global yarn
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 RUN docker-php-ext-install pdo_mysql mbstring mysqli zip exif pcntl bcmath json gd
-RUN pecl install -o -f redis mongodb apcu \
+RUN pecl install -o -f redis mongodb apcu Mosquitto-alpha \
     &&  rm -rf /tmp/pear \
-    && docker-php-ext-enable redis mongodb apcu
+    && docker-php-ext-enable redis mongodb apcu Mosquitto-alpha
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
