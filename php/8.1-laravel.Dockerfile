@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y -qq \
     cron \
     git \
     jpegoptim optipng pngquant gifsicle libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev \
+    libpq-dev \
     libssl-dev \
     libzip-dev \
     locales \
@@ -39,7 +40,7 @@ RUN npm install --global yarn
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 # Start from php8.0 json ext always available
-RUN docker-php-ext-install pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mysqli pdo_pgsql mbstring zip exif pcntl bcmath gd
 RUN pecl install -o -f redis mongodb apcu \
     &&  rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu
