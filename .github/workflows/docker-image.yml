@@ -6,9 +6,11 @@ on:
       dockerfile_path:
         description: Dockerfile path
         required: true
+        default: php/8.2-laravel.Dockerfile
       image:
         description: Image name
         required: true
+        default: haidarns/php:8.2-laravel-nginx
       build_args:
         description: Additional docker build args
         default: --rm --no-cache

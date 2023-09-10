@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends -qq \
     locales \
     nano \
     nginx \
-    nodejs \
+    nodejs npm \
     supervisor \
     unzip \
     vim \
