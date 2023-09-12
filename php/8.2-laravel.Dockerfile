@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y -qq \
     libssl-dev \
     libzip-dev \
     libpq-dev \
+    libicu-dev \
     locales \
     nano \
     nginx \
@@ -38,9 +39,10 @@ RUN apt-get update && apt-get install -y -qq \
 RUN npm install --global yarn
 
 # Install extensions
-RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
+RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
+    && docker-php-ext-configure intl
 # Start from php8.0 json ext always available
-RUN docker-php-ext-install pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
+RUN docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
 RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu grpc protobuf\
     && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
     &&  rm -rf /tmp/pear \
