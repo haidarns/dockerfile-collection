@@ -53,8 +53,8 @@ RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
 #    && rm -rf /tmp/pear \
 #    && docker-php-ext-enable grpc protobuf
 
-COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/grpc.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
-COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/protobuf.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20220829/grpc.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
+COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20220829/protobuf.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
 RUN docker-php-ext-enable grpc protobuf
 
 # Install composer
