@@ -2,7 +2,7 @@
 # Build command :
 #   DOCKER_BUILDKIT=1 docker build --rm -f 8.2-laravel.Dockerfile -t haidarns/php:8.2-laravel-nginx --no-cache .
 
-FROM haidarns/php:8.1-laravel-nginx as GRPC_SOURCE
+FROM haidarns/php:8.2-laravel-nginx as GRPC_SOURCE
 FROM php:8.2-fpm
 
 # Change www-data user & group id same as host's ubuntu id
