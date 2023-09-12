@@ -2,6 +2,7 @@
 # Build command :
 #   DOCKER_BUILDKIT=1 docker build --rm -f 8.2-laravel.Dockerfile -t haidarns/php:8.2-laravel-nginx --no-cache .
 
+FROM haidarns/php:8.1-laravel-nginx as GRPC_SOURCE
 FROM php:8.2-fpm
 
 # Change www-data user & group id same as host's ubuntu id
@@ -43,15 +44,18 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/i
     && docker-php-ext-configure intl
 # Start from php8.0 json ext always available
 RUN docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd
-RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu grpc protobuf\
-    && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
-    &&  rm -rf /tmp/pear \
-    && docker-php-ext-enable redis mongodb apcu grpc protobuf
+RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable redis mongodb apcu
 
 #RUN MAKEFLAGS="-j 3" pecl install -o -f grpc protobuf \
 #    && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
 #    && rm -rf /tmp/pear \
 #    && docker-php-ext-enable grpc protobuf
+
+COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/grpc.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/protobuf.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
+RUN docker-php-ext-enable grpc protobuf
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
