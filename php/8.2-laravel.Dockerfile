@@ -15,7 +15,7 @@ WORKDIR /var/www/
 RUN curl -sL https://deb.nodesource.com/setup_16.x -o - | bash
 
 # Install dependencies
-RUN apt-get update && apt-get install -y -qq \
+RUN apt update -qq && apt install --no-install-recommends -y -qq \
     build-essential \
     cron \
     git \
@@ -37,18 +37,18 @@ RUN apt-get update && apt-get install -y -qq \
     && rm -rf /var/lib/apt/lists/*
 
 # Install yarn
-RUN npm install --global yarn
+RUN npm install -s --global yarn
 
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-configure intl
 # Start from php8.0 json ext always available
-RUN docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets
-RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
+RUN set -x && docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets
+RUN MAKEFLAGS="-j 3" pecl install -q -o -f redis mongodb apcu \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu
 
-#RUN MAKEFLAGS="-j 3" pecl install -o -f grpc protobuf \
+#RUN MAKEFLAGS="-j 3" pecl install -q -o -f grpc protobuf \
 #    && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
 #    && rm -rf /tmp/pear \
 #    && docker-php-ext-enable grpc protobuf

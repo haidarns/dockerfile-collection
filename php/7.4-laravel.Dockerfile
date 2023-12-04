@@ -14,7 +14,7 @@ WORKDIR /var/www/
 RUN curl -sL https://deb.nodesource.com/setup_16.x -o - | bash
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends -qq \
+RUN apt update -qq && apt install --no-install-recommends -y -qq \
     build-essential \
     cron \
     git \
@@ -36,12 +36,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends -qq \
     && rm -rf /var/lib/apt/lists/*
 
 # Install yarn
-RUN npm install --global yarn
+RUN npm install -s --global yarn
 
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
-RUN docker-php-ext-install pdo_mysql mbstring mysqli zip exif pcntl bcmath json gd
-RUN pecl install -o -f redis mongodb apcu imagick Mosquitto-alpha \
+RUN set -x && docker-php-ext-install pdo_mysql mbstring mysqli zip exif pcntl bcmath json gd
+RUN pecl install -q -o -f redis mongodb apcu imagick Mosquitto-alpha \
     &&  rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu imagick mosquitto
 
