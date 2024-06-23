@@ -42,7 +42,7 @@ RUN npm install -s --global yarn
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/
 RUN set -x && docker-php-ext-install pdo_mysql mbstring mysqli zip exif pcntl bcmath json gd
-RUN pecl install -q -o -f redis mongodb apcu imagick Mosquitto-alpha \
+RUN pecl install -o -f redis mongodb apcu imagick Mosquitto-alpha \
     &&  rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu imagick mosquitto
 
