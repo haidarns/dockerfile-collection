@@ -31,6 +31,7 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     unzip \
     vim \
     weasyprint \
+    ghostscript \
     zip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
