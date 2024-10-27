@@ -44,11 +44,11 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/i
     && docker-php-ext-configure intl
 # Start from php8.0 json ext always available
 RUN set -x && docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets
-RUN MAKEFLAGS="-j 3" pecl install -q -o -f redis mongodb apcu \
+RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu
 
-#RUN MAKEFLAGS="-j 3" pecl install -q -o -f grpc protobuf \
+#RUN MAKEFLAGS="-j 3" pecl install -o -f grpc protobuf \
 #    && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
 #    && rm -rf /tmp/pear \
 #    && docker-php-ext-enable grpc protobuf
