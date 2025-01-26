@@ -21,7 +21,10 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x -o - | bash \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl zip gd pdo_pgsql pcntl
+    && docker-php-ext-install intl zip gd pdo_pgsql pcntl bcmath \
+    && MAKEFLAGS="-j 3" pecl install -o -f mongodb \
+    && rm -rf /tmp/pear \
+    && docker-php-ext-enable mongodb
 
 
 ## Example build
