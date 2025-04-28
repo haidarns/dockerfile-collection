@@ -31,10 +31,13 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     supervisor \
     unzip \
     vim \
-    weasyprint \
     zip \
+    python3-pip libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0 libjpeg-dev libopenjp2-7-dev libffi-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install weasyprint pip
+pip install weasyprint --break-system-packages
 
 # Install yarn
 RUN npm install -s --global yarn
