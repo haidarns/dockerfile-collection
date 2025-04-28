@@ -37,7 +37,7 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     && rm -rf /var/lib/apt/lists/*
 
 # Install weasyprint pip
-pip install weasyprint --break-system-packages
+RUN pip install weasyprint --break-system-packages
 
 # Install yarn
 RUN npm install -s --global yarn
