@@ -11,7 +11,7 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 WORKDIR /var/www/
 
 # Setup Node 16 repo
-RUN curl -sL https://deb.nodesource.com/setup_16.x -o - | bash
+RUN curl -sL https://deb.nodesource.com/setup_18.x -o - | bash
 
 # Install dependencies
 RUN apt update -qq && apt install --no-install-recommends -y -qq \
