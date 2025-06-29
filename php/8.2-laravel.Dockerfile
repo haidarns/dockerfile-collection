@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.4.0
 # Build command :
-#   DOCKER_BUILDKIT=1 docker build --rm -f 8.2-laravel.Dockerfile -t haidarns/php:8.2-laravel-nginx --no-cache .
+#   DOCKER_BUILDKIT=1 docker build --rm -f php/8.2-laravel.Dockerfile -t haidarns/php:8.2-laravel-nginx --no-cache .
 
 FROM haidarns/php:8.2-laravel-nginx as GRPC_SOURCE
 FROM php:8.2-fpm
@@ -24,6 +24,7 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     libzip-dev \
     libpq-dev \
     libicu-dev \
+    libldap2-dev \
     locales \
     nano \
     nginx \
@@ -44,9 +45,10 @@ RUN npm install -s --global yarn
 
 # Install extensions
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
-    && docker-php-ext-configure intl
+    && docker-php-ext-configure intl \
+    && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
 # Start from php8.0 json ext always available
-RUN set -x && docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets
+RUN set -x && docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets ldap
 RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu
