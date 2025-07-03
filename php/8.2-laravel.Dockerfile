@@ -37,8 +37,9 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install weasyprint pip
-RUN pip install weasyprint --break-system-packages
+# Install weasyprint pip & create symlink mimic weasyprint from apt (used for laravel deps)
+RUN pip install weasyprint --break-system-packages \
+    && ln -s /usr/local/bin/weasyprint /usr/bin/weasyprint
 
 # Install yarn
 RUN npm install -s --global yarn
