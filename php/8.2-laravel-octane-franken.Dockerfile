@@ -17,6 +17,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x -o - | bash \
         jpegoptim optipng pngquant gifsicle libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev \
         libicu-dev libssl-dev libzip-dev libpq-dev \
         weasyprint \
+        git \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
