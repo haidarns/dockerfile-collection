@@ -8,6 +8,6 @@ jobs:
     uses: ./.github/workflows/docker-image.yml
     with:
       dockerfile_path: php/8.2-laravel-octane-franken.Dockerfile
-      image: haidarns/php:8.2-laravel-octane-franken-nginx
+      image: haidarns/php:8.2-laravel-octane-franken
       build_args: --rm --no-cache
       build_env: DOCKER_BUILDKIT=1
