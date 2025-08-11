@@ -21,6 +21,7 @@ on:
         description: Docker build environment
         default: DOCKER_BUILDKIT=1
         type: string
+  workflow_dispatch: *inputs_common
 
 jobs:
   build:
