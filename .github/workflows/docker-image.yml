@@ -7,17 +7,20 @@ on:
         description: Dockerfile path
         required: true
         default: php/8.2-laravel.Dockerfile
+        type: string
       image:
         description: Image name
         required: true
         default: haidarns/php:8.2-laravel-nginx
+        type: string
       build_args:
         description: Additional docker build args
         default: --rm --no-cache
+        type: string
       build_env:
         description: Docker build environment
         default: DOCKER_BUILDKIT=1
-  workflow_dispatch: *inputs_common
+        type: string
 
 jobs:
   build:
