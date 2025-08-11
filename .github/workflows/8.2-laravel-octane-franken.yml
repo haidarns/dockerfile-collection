@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-build-docker:
-    uses: ./.github/workflows/docker-image.yml
+    uses: ./docker-image.yml
     with:
       dockerfile_path: php/8.2-laravel-octane-franken.Dockerfile
       image: haidarns/php:8.2-laravel-octane-franken-nginx
