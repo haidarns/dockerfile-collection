@@ -11,3 +11,6 @@ jobs:
       image: haidarns/php:8.2-laravel-octane-franken
       build_args: --rm --no-cache
       build_env: DOCKER_BUILDKIT=1
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
