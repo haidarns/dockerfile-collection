@@ -29,12 +29,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: ${{ github.event.inputs.build_env }} docker build --file ${{ github.event.inputs.dockerfile_path }} --tag ${{ github.event.inputs.image }} ${{ github.event.inputs.build_args }} .
+      run: ${{ inputs.build_env }} docker build --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image }} ${{ inputs.build_args }} .
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Push docker image
-      run: docker push ${{ github.event.inputs.image }}
+      run: docker push ${{ inputs.image }}
 
