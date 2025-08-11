@@ -23,9 +23,9 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x -o - | bash \
     && docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl zip gd pdo_pgsql pcntl bcmath \
-    && MAKEFLAGS="-j 3" pecl install -o -f mongodb \
+    && MAKEFLAGS="-j 3" pecl install -o -f mongodb redis \
     && rm -rf /tmp/pear \
-    && docker-php-ext-enable mongodb
+    && docker-php-ext-enable mongodb redis
 
 
 ## Example build
@@ -42,3 +42,4 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x -o - | bash \
 #     && chown -R 1000:1000 .
 
 CMD ["php","artisan","octane:frankenphp","--port=80"]
+
