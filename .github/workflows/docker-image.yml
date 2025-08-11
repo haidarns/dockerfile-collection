@@ -21,6 +21,13 @@ on:
         description: Docker build environment
         default: DOCKER_BUILDKIT=1
         type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        description: Docker Hub username
+        required: true
+      DOCKERHUB_TOKEN:
+        description: Docker Hub token
+        required: true
   workflow_dispatch: *inputs_common
 
 jobs:
