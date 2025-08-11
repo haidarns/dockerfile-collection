@@ -1,7 +1,7 @@
 name: Docker Image CI
 
 on:
-  workflow_dispatch:
+  workflow_call:  &inputs_common
     inputs:
       dockerfile_path:
         description: Dockerfile path
@@ -17,6 +17,7 @@ on:
       build_env:
         description: Docker build environment
         default: DOCKER_BUILDKIT=1
+  workflow_dispatch: *inputs_common
 
 jobs:
   build:
