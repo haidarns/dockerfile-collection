@@ -1,4 +1,4 @@
-name: php-8.1-laravel-nginx
+name: php-8.1-laravel
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ jobs:
   call-build-docker:
     uses: ./.github/workflows/docker-image.yml
     with:
-      dockerfile_path: php/8.1-laravel-nginx.Dockerfile
+      dockerfile_path: php/8.1-laravel.Dockerfile
       image: haidarns/php:8.1-laravel-nginx
       build_args: --rm --no-cache
       build_env: DOCKER_BUILDKIT=1
