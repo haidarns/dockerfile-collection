@@ -46,6 +46,9 @@ RUN pecl install -o -f redis mongodb-1.20.1 apcu imagick Mosquitto-alpha \
     &&  rm -rf /tmp/pear \
     && docker-php-ext-enable redis mongodb apcu imagick mosquitto
 
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    echo "memory_limit = 128M" >> /usr/local/etc/php/php.ini
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

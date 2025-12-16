@@ -55,6 +55,9 @@ COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
 COPY --from=GRPC_SOURCE /usr/local/lib/php/extensions/no-debug-non-zts-20210902/protobuf.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/
 RUN docker-php-ext-enable grpc protobuf
 
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini \
+    echo "memory_limit = 128M" >> /usr/local/etc/php/php.ini
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
