@@ -25,6 +25,8 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     libpq-dev \
     libicu-dev \
     libldap2-dev \
+    libmagickwand-dev \
+    imagemagick \
     locales \
     nano \
     nginx \
@@ -50,9 +52,9 @@ RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/i
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
 # Start from php8.0 json ext always available
 RUN set -x && docker-php-ext-install intl pdo_pgsql pdo_mysql mysqli mbstring zip exif pcntl bcmath gd sockets ldap
-RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu \
+RUN MAKEFLAGS="-j 3" pecl install -o -f redis mongodb apcu imagick \
     && rm -rf /tmp/pear \
-    && docker-php-ext-enable redis mongodb apcu
+    && docker-php-ext-enable redis mongodb apcu imagick
 
 #RUN MAKEFLAGS="-j 3" pecl install -o -f grpc protobuf \
 #    && strip --strip-debug /usr/local/lib/php/extensions/*/grpc.so \
