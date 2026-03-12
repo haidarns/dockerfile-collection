@@ -36,6 +36,7 @@ RUN apt update -qq && apt install --no-install-recommends -y -qq \
     vim \
     zip \
     python3-pip libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0 libjpeg-dev libopenjp2-7-dev libffi-dev \
+    libreoffice-common libreoffice-writer fonts-noto fonts-noto-cjk \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
