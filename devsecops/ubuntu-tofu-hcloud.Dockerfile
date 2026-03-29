@@ -31,6 +31,7 @@ RUN curl -LO "https://cn-north-4-hdn-koocli.obs.cn-north-4.myhuaweicloud.com/cli
     && tar -zxvf huaweicloud-cli-linux-amd64.tar.gz \
     && mv hcloud /usr/local/bin/ \
     && rm huaweicloud-cli-linux-amd64.tar.gz \
+    && hcloud configure set --cli-agree-privacy-statement=true \
     && hcloud version
 
 # Set environment variables (opsional, sesuaikan dengan kebutuhan)
